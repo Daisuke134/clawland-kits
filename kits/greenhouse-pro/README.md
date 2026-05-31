@@ -42,6 +42,18 @@ Small to medium greenhouse (10–100 m²). The kit prevents the top 4 greenhouse
 5. Run `picclaw skill install greenhouse-pro`
 6. Access dashboard at `http://<device-ip>:8080`
 
+## Included Deliverables
+
+- `BOM.md` — parts list with budget and purchase guidance
+- `WIRING.md` — pin map, relay layout, and power budget
+- `fritzing/greenhouse-pro.fz` + `wiring.fzz` — starter Fritzing source bundle
+- `drivers/` — sensor and actuator driver stubs plus orchestration entry point
+- `skill.yaml` / `alerts.yaml` — PicoClaw skill and alert thresholds
+- `ASSEMBLY.md` — enclosure, cable routing, and installation sequence
+- `TEST_REPORT.md` — calibration assumptions and validation checklist
+- `enclosure.scad` — printable electronics box and lid
+- `dashboard.json` — Grafana dashboard template for greenhouse telemetry
+
 ## Board Support
 
 | Board | RAM | NPU | Status |
