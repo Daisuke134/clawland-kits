@@ -1,0 +1,33 @@
+# Alert Thresholds — Greenhouse Pro Kit
+# File: alerts.yaml
+# All thresholds are configurable. Values outside range trigger alerts and actuator response.
+
+greenhouse_pro:
+  # Air temperature
+  air_temp_max_c: 30.0        # Trigger vent fan
+  air_temp_min_c: 2.0         # Trigger heater (frost protection)
+
+  # Humidity
+  humidity_min_pct: 40.0      # Trigger misting
+  humidity_max_pct: 90.0      # Trigger vent fan
+
+  # CO2
+  co2_max_ppm: 1500            # Alert only (vent if paired with high temp)
+  co2_min_ppm: 350             # Alert — CO2 starvation (sealed greenhouse)
+
+  # Soil moisture
+  soil_moisture_min_pct: 30.0  # Trigger irrigation
+  soil_moisture_max_pct: 85.0  # Alert — overwatering
+
+  # Light
+  lux_min: 5000                # Alert — insufficient light (< 5 klux)
+  lux_max: 85000               # Alert — excessive light (> 85 klux)
+
+  # Rain
+  rain_alert: true             # Alert on rain detection (close vents if open)
+
+  # Dew point (condensation risk)
+  dew_point_margin_c: 2.0      # Alert if air temp - dew point < 2°C
+
+  # Heat index
+  heat_index_max_c: 35.0       # Alert + vent fan override

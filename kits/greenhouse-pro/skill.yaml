@@ -1,0 +1,125 @@
+# PicoClaw Skill Configuration — Greenhouse Pro Kit
+# File: skill.yaml
+
+name: greenhouse-pro
+version: "1.0.0"
+description: "Comprehensive greenhouse monitoring and automation — soil, climate, CO2, ventilation control"
+author: "Anicca via Clawland-AI"
+board:
+  primary: "licheerv-nano"
+  supported: ["licheerv-nano", "esp32-s3", "rp2040-w"]
+  ram_min_mb: 64
+
+i2c:
+  scl: 22
+  sda: 21
+  freq_hz: 100000
+
+sensors:
+  - name: bme280
+    driver: bme280.py
+    class: BME280
+    i2c_addr: 0x76
+    poll_interval_s: 60
+    metrics:
+      - temperature_c
+      - humidity_pct
+      - pressure_hpa
+      - dew_point_c
+      - heat_index_c
+
+  - name: sgp30
+    driver: sgp30.py
+    class: SGP30
+    i2c_addr: 0x58
+    poll_interval_s: 60
+    warmup_s: 15
+    metrics:
+      - co2_ppm
+      - tvoc_ppb
+
+  - name: bh1750
+    driver: bh1750.py
+    class: BH1750
+    i2c_addr: 0x23
+    poll_interval_s: 60
+    metrics:
+      - lux
+      - dli
+
+  - name: soil_moisture
+    driver: soil_moisture.py
+    class: SoilMoistureSensor
+    interface: adc
+    pin: 26
+    poll_interval_s: 60
+    calibration:
+      dry_adc: 65535
+      saturated_adc: 18000
+    metrics:
+      - moisture_vwc_pct
+      - raw_adc
+
+  - name: ds18b20_soil
+    driver: ds18b20.py
+    class: DS18B20Probe
+    interface: onewire
+    pin: 4
+    pullup_ohm: 4700
+    poll_interval_s: 60
+    metrics:
+      - temperature_c
+
+  - name: rain
+    driver: rain_sensor.py
+    class: RainSensor
+    interface: gpio
+    digital_pin: 14
+    analog_pin: 27
+    poll_interval_s: 30
+    metrics:
+      - raining
+      - intensity_pct
+
+actuators:
+  - name: vent_fan
+    type: relay
+    pin: 16
+    active: low
+    min_run_s: 60
+
+  - name: irrigation
+    type: relay
+    pin: 17
+    active: low
+    cooldown_s: 1800
+
+  - name: misting
+    type: relay
+    pin: 18
+    active: low
+    cooldown_s: 900
+
+  - name: heater
+    type: relay
+    pin: 19
+    active: low
+
+orchestrator:
+  driver: greenhouse_pro.py
+  poll_interval_s: 60
+  alert_config: alerts.yaml
+
+dashboard:
+  port: 8080
+  template: dashboard.json
+
+dependencies:
+  - bme280.py
+  - sgp30.py
+  - bh1750.py
+  - soil_moisture.py
+  - ds18b20.py
+  - rain_sensor.py
+  - relay_control.py
+  - greenhouse_pro.py

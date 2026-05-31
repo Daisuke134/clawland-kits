@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module fritzingVersion="1.0.0" moduleId="greenhouse-pro-wiring">
+  <title>Greenhouse Pro Wiring</title>
+  <author>Anicca</author>
+  <description>
+    Breadboard-level wiring summary for the Greenhouse Pro kit.
+    This sketch mirrors kits/greenhouse-pro/WIRING.md and is intended as a starter source bundle
+    for import into Fritzing before replacing generic headers with exact part footprints.
+  </description>
+  <notes>
+    <![CDATA[
+LicheeRV-Nano:
+- I2C SDA -> pin 3
+- I2C SCL -> pin 5
+- DS18B20 bus -> pin 7 / GPIO4
+- Rain digital -> pin 8 / GPIO14
+- Rain analog -> pin 13 / GPIO27
+- Soil moisture analog -> pin 37 / GPIO26
+- Relay channels -> pins 11, 12, 35, 36
+
+Shared power:
+- 3.3V powers BME280 / SGP30 / BH1750 / DS18B20 / moisture / rain board
+- External 12V powers relay coils and actuators
+
+See WIRING.md for current budget, pull-ups, and actuator-side wiring.
+    ]]>
+  </notes>
+</module>
